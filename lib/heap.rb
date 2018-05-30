@@ -29,6 +29,7 @@ class BinaryMinHeap
   def push(val)
     @store.push(val)
     BinaryMinHeap.heapify_up(@store, count - 1, count)
+    val
   end
 
   public
