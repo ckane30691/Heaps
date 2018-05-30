@@ -62,5 +62,19 @@ class BinaryMinHeap
   end
 
   def self.heapify_up(array, child_idx, len = array.length, &prc)
+    prc ||= Proc.new do |el1, el2|
+      el1 <=> el2
+    end
+    return array if child_idx.zero?
+    child = array[child_idx]
+    parentIdx = BinaryMinHeap.parent_index(child_idx)
+    parent = array[parentIdx]
+    if prc.call(child, parent) < 0
+      array[child_idx] = parent
+      array[parentIdx] = child
+      child_idx = parentIdx
+    end
+    return array if prc.call(child, parent) > 0
+    return BinaryMinHeap.heapify_up(array, child_idx, len, &prc)
   end
 end
