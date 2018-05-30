@@ -3,7 +3,7 @@ class BinaryMinHeap
 
   def initialize(&prc)
     @store = []
-    @prc = prc || Proc.new do |el1, el2|
+    @prc ||= Proc.new do |el1, el2|
       -1 * (el1 <=> el2)
     end
   end
