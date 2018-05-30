@@ -13,6 +13,13 @@ class BinaryMinHeap
   end
 
   def extract
+    firstVal = @store[0]
+    lastVal = @store[count - 1]
+    @store[0] = lastVal
+    @store[count - 1] = firstVal
+    @store.pop
+    BinaryMinHeap.heapify_down(@store, 0, count)
+    firstVal
   end
 
   def peek
@@ -20,6 +27,8 @@ class BinaryMinHeap
   end
 
   def push(val)
+    @store.push(val)
+    BinaryMinHeap.heapify_up(@store, count - 1, count)
   end
 
   public
